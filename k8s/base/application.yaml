@@ -1,0 +1,17 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: nginx-app
+  namespace: argocd
+spec:
+  destination:
+    namespace: default
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/SaiGane5/batton.git # Replace with your Git repo
+    targetRevision: main
+    path: k8s/base # Directory containing YAML manifests
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
